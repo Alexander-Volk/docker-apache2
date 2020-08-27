@@ -2,6 +2,9 @@ FROM ubuntu:trusty
 
 LABEL maintainer="Volk  mr.volchonok@gmail.com"
 
+WORKDIR /var/www/site
+
+
 RUN apt-get update && \
     apt-get install -y software-properties-common && \
     add-apt-repository -y ppa:openjdk-r/ppa && \
@@ -10,8 +13,6 @@ RUN apt-get update && \
     apt-get install -y apache2 && \
     apt-get install -y ntp
 
-WORKDIR /var/www/site
-
 RUN mkdir -p web/etc web/www
 
 #ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64
@@ -19,4 +20,4 @@ RUN mkdir -p web/etc web/www
 
 EXPOSE 80
 
-CMD ["apachectl", "-D", "FOREGROUND"]
+ENTRYPOINT ["apachectl", "-D", "FOREGROUND"]
